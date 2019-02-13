@@ -16,11 +16,12 @@
   <xacro:property name="arm_length_back_y" value="0.2" /> <!-- [m] -->
   <xacro:property name="rotor_offset_top" value="0.023" /> <!-- [m] -->
   <xacro:property name="radius_rotor" value="0.1" /> <!-- [m] -->
-  <xacro:property name="motor_constant" value="8.54858e-06" /> <!-- [kg.m/s^2] -->
+  <xacro:property name="motor_constant" value="12.44460e-06" /> <!-- [kg.m/s^2] --> 
+  <!-- for default = 8.54858e-06  --> <!-- for 0.3 kg = 10.44460e-06  -->
   <xacro:property name="moment_constant" value="0.016" /> <!-- [m] -->
   <xacro:property name="time_constant_up" value="0.0125" /> <!-- [s] -->
   <xacro:property name="time_constant_down" value="0.025" /> <!-- [s] -->
-  <xacro:property name="max_rot_velocity" value="838" /> <!-- [rad/s] -->
+  <xacro:property name="max_rot_velocity" value="1200" /> <!-- [rad/s] -->
   <xacro:property name="sin30" value="0.5" />
   <xacro:property name="cos30" value="0.866025403784" />
   <xacro:property name="sqrt2" value="1.4142135623730951" />
@@ -30,7 +31,12 @@
   <!-- Property Blocks -->
   <xacro:property name="body_inertia">
     <inertia ixx="0.0347563" ixy="0.0" ixz="0.0" iyy="0.0458929" iyz="0.0" izz="0.0977" /> <!-- [kg.m^2] [kg.m^2] [kg.m^2] [kg.m^2] [kg.m^2] [kg.m^2] -->
-  </xacro:property>
+  </xacro:property> 
+
+<!--      MODIFIED INERTIA  FOR m = 0.3       -->
+  <!-- <xacro:property name="body_inertia">
+    <inertia ixx="0.0397563" ixy="0.0" ixz="0.0" iyy="0.0508929" iyz="0.0" izz="0.1077" />
+   </xacro:property> -->
 
   <!-- inertia of a single rotor, assuming it is a cuboid. Height=3mm, width=15mm -->
   <xacro:property name="rotor_inertia">
@@ -143,7 +149,7 @@
   <xacro:property name="mass_arm" value="0.01" /> 
 
    <link name="box">
-    <xacro:box_inertial x="${arm_length}" y="0.03" z="0.01" mass="0.3">
+    <xacro:box_inertial x="${arm_length}" y="0.03" z="0.01" mass="1">
       <origin xyz="${arm_length/2} 0 0" />
     </xacro:box_inertial>
     <visual>
