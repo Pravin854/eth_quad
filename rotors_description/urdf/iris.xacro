@@ -143,25 +143,25 @@
   <xacro:property name="mass_arm" value="0.01" /> 
 
    <link name="box">
-    <xacro:box_inertial x="${arm_length}" y="0.03" z="0.01" mass="0.3">
-      <origin xyz="${arm_length/2} 0 0" />
+    <xacro:box_inertial x="-0.1" y="-0.1" z="-0.1" mass="0.3">
+      <origin xyz="0 0 0" />
     </xacro:box_inertial>
     <visual>
-      <origin xyz="${arm_length/2} 0 0" rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <box size="0.2 0.2 0.2"/> <!-- [m] [m] [m] -->
       </geometry>
     </visual>
     <collision>
-      <origin xyz="${arm_length/2} 0 0" rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <box size="$0.2 0.2 0.2"/> <!-- [m] [m] [m] -->
+        <box size="0.2 0.2 0.2"/> <!-- [m] [m] [m] -->
        </geometry>
     </collision>
   </link>
 
     <joint name="${namespace}/base_joint_box" type="fixed">
-      <origin xyz="-0.3 0 -0.12" rpy="0 0 0" />
+      <origin xyz="0 0 -0.12" rpy="0 0 0" />
       <parent link="${namespace}/base_link" />
       <child link="box" />
     </joint>  

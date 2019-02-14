@@ -105,14 +105,8 @@ void LeePositionController::ComputeDesiredAcceleration(Eigen::Vector3d* accelera
 
   Eigen::Vector3d e_3(Eigen::Vector3d::UnitZ());
 
-  //Added by Viswa
-  static Eigen::Vector3d position_error_integral;
-  position_error_integral = position_error_integral + position_error;
-
-
   *acceleration = (position_error.cwiseProduct(controller_parameters_.position_gain_)
-      + velocity_error.cwiseProduct(controller_parameters_.velocity_gain_)
-      + position_error_integral.cwiseProduct(controller_parameters_.position_integral_gain_)) / vehicle_parameters_.mass_
+      + velocity_error.cwiseProduct(controller_parameters_.velocity_gain_)) / vehicle_parameters_.mass_
       - vehicle_parameters_.gravity_ * e_3 - command_trajectory_.acceleration_W;
 }
 
@@ -151,8 +145,6 @@ void LeePositionController::ComputeDesiredAngularAcc(const Eigen::Vector3d& acce
   angular_rate_des[2] = command_trajectory_.getYawRate();
 
   Eigen::Vector3d angular_rate_error = odometry_.angular_velocity - R_des.transpose() * R * angular_rate_des;
-
-  
 
   *angular_acceleration = -1 * angle_error.cwiseProduct(normalized_attitude_gain_)
                            - angular_rate_error.cwiseProduct(normalized_angular_rate_gain_)

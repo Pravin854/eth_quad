@@ -74,6 +74,15 @@ void LeePositionControllerNode::InitializeParams() {
   GetRosParameter(private_nh_, "velocity_gain/z",
                   lee_position_controller_.controller_parameters_.velocity_gain_.z(),
                   &lee_position_controller_.controller_parameters_.velocity_gain_.z());
+  GetRosParameter(private_nh_, "position_integral_gain/x",
+                  lee_position_controller_.controller_parameters_.position_integral_gain_.x(),
+                  &lee_position_controller_.controller_parameters_.position_integral_gain_.x()); //Added by Viswa
+  GetRosParameter(private_nh_, "position_integral_gain/y",
+                  lee_position_controller_.controller_parameters_.position_integral_gain_.y(),
+                  &lee_position_controller_.controller_parameters_.position_integral_gain_.y()); //Added by Viswa
+  GetRosParameter(private_nh_, "position_integral_gain/z",
+                  lee_position_controller_.controller_parameters_.position_integral_gain_.z(),
+                  &lee_position_controller_.controller_parameters_.position_integral_gain_.z()); //Added by Viswa
   GetRosParameter(private_nh_, "attitude_gain/x",
                   lee_position_controller_.controller_parameters_.attitude_gain_.x(),
                   &lee_position_controller_.controller_parameters_.attitude_gain_.x());
