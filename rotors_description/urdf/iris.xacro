@@ -139,23 +139,20 @@
     <xacro:insert_block name="rotor_inertia" />
   </xacro:vertical_rotor>
 
-  <xacro:property name="arm_length" value="0.6" />
-  <xacro:property name="mass_arm" value="0.01" /> 
-
-   <link name="box">
-    <xacro:box_inertial x="-0.1" y="-0.1" z="-0.1" mass="0.3">
+     <link name="box">
+    <xacro:box_inertial x="-0.1" y="-0.1" z="-0.1" mass="0.8">
       <origin xyz="0 0 0" />
     </xacro:box_inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <box size="0.2 0.2 0.2"/> <!-- [m] [m] [m] -->
+        <box size="0.2 0.2 0.2"/> 
       </geometry>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <box size="0.2 0.2 0.2"/> <!-- [m] [m] [m] -->
+        <box size="0.2 0.2 0.2"/> 
        </geometry>
     </collision>
   </link>
@@ -165,4 +162,12 @@
       <parent link="${namespace}/base_link" />
       <child link="box" />
     </joint>  
+
+
+ <xacro:hokuyo_utm30lx robot_namespace="${namespace}" min_angle="-1.047" max_angle="1.047"
+    update_rate="40" ray_count="10">
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+  </xacro:hokuyo_utm30lx> 
+
+
 </robot>

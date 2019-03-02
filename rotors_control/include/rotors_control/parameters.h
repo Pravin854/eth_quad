@@ -12,6 +12,7 @@ static constexpr double kDefaultRotor5Angle = -0.52359877559;
 
 // Default vehicle parameters for Asctec Firefly.
 static constexpr double kDefaultMass = 1.56779;
+static constexpr double kDefaultPayloadMass = 0.0;
 static constexpr double kDefaultArmLength = 0.215;
 static constexpr double kDefaultInertiaXx = 0.0347563;
 static constexpr double kDefaultInertiaYy = 0.0458929;
@@ -74,10 +75,12 @@ class VehicleParameters {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
   VehicleParameters()
       : mass_(kDefaultMass),
+        payload_mass_(kDefaultPayloadMass),
         gravity_(kDefaultGravity),
         inertia_(Eigen::Vector3d(kDefaultInertiaXx, kDefaultInertiaYy,
                                  kDefaultInertiaZz).asDiagonal()) {}
   double mass_;
+  double payload_mass_;
   const double gravity_;
   Eigen::Matrix3d inertia_;
   RotorConfiguration rotor_configuration_;

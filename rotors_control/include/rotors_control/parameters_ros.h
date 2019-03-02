@@ -49,6 +49,9 @@ inline void GetVehicleParameters(const ros::NodeHandle& nh, VehicleParameters* v
   GetRosParameter(nh, "mass",
                   vehicle_parameters->mass_,
                   &vehicle_parameters->mass_);
+  GetRosParameter(nh, "payload_mass",
+                  vehicle_parameters->payload_mass_,
+                  &vehicle_parameters->payload_mass_);
   GetRosParameter(nh, "inertia/xx",
                   vehicle_parameters->inertia_(0, 0),
                   &vehicle_parameters->inertia_(0, 0));

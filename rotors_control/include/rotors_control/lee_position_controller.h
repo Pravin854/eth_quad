@@ -24,6 +24,7 @@
 #include <mav_msgs/conversions.h>
 #include <mav_msgs/eigen_mav_msgs.h>
 
+
 #include "rotors_control/common.h"
 #include "rotors_control/parameters.h"
 
@@ -65,6 +66,7 @@ class LeePositionController {
   void CalculateRotorVelocities(Eigen::VectorXd* rotor_velocities) const;
 
   void SetOdometry(const EigenOdometry& odometry);
+  // void UpdateMassAndInertia(double new_mass); //Added by Viswa
   void SetTrajectoryPoint(
     const mav_msgs::EigenTrajectoryPoint& command_trajectory);
 
@@ -72,13 +74,18 @@ class LeePositionController {
   VehicleParameters vehicle_parameters_;
 
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+  mutable double normalized_mass; //Added by Viswa
+
  private:
   bool initialized_params_;
   bool controller_active_;
+  mutable bool integral_active_ = 0; //Added by Viswa
 
   Eigen::Vector3d normalized_attitude_gain_;
   Eigen::Vector3d normalized_angular_rate_gain_;
   Eigen::MatrixX4d angular_acc_to_rotor_velocities_;
+
+  //double test_mass; //Added by Viswa
 
   mav_msgs::EigenTrajectoryPoint command_trajectory_;
   EigenOdometry odometry_;

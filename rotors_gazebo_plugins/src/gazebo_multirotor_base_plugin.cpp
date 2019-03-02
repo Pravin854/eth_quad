@@ -24,6 +24,7 @@
 
 // STANDARD LIB INCLUDES
 #include <ctime>
+#include <ros/ros.h>
 
 #include "ConnectGazeboToRosTopic.pb.h"
 
@@ -39,6 +40,7 @@ void GazeboMultirotorBasePlugin::Load(physics::ModelPtr _model,
     gzdbg << __FUNCTION__ << "() called." << std::endl;
   }
 
+  ROS_INFO("MultiRotor base initiated.");
   model_ = _model;
   world_ = model_->GetWorld();
   namespace_.clear();

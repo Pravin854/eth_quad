@@ -200,8 +200,14 @@ void LeePositionControllerNode::OdometryCallback(const nav_msgs::OdometryConstPt
 
   motor_velocity_reference_pub_.publish(actuator_msg);
 }
-
 }
+/*void UpdaterCallback(const std_msgs::String::ConstPtr& update) //Added by Viswa
+{
+  ROS_INFO("Parameter Update received.");
+  lee_position_controller_.UpdateMassAndInertia();
+}*/
+
+
 
 int main(int argc, char** argv) {
   ros::init(argc, argv, "lee_position_controller_node");

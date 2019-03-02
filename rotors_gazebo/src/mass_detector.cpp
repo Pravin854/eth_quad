@@ -30,7 +30,7 @@
 
 int main(int argc, char** argv) {
   ros::init(argc, argv, "hovering_example");
-  ros::NodeHandle nh;
+  ros::NodeHandle nh, n;
   // Create a private node handle for accessing node parameters.
   ros::NodeHandle nh_private("~");
   ros::Publisher trajectory_pub =
@@ -80,6 +80,20 @@ int main(int argc, char** argv) {
            nh.getNamespace().c_str(), desired_position.x(),
            desired_position.y(), desired_position.z());
   trajectory_pub.publish(trajectory_msg);
+
+  ros::Duration(10.0).sleep();
+
+  ros::Publisher updater_ = n.advertise<std_msgs::String>("updater", 1000);
+
+  std_msgs::String update;
+
+  update.data = "Update Values";
+
+  ROS_INFO("%s", update.data.c_str());
+
+  updater_.publish(update);
+
+
 
 
   ros::spin();
