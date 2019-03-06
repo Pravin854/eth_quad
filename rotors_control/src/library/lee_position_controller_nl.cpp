@@ -38,7 +38,6 @@ void LeePositionController::InitializeParameters() {
 
   //Added by Viswa : To add payload mass with base mass
   normalized_mass = vehicle_parameters_.mass_ + vehicle_parameters_.payload_mass_;
-  
 
   Eigen::Matrix4d I;
   I.setZero();
@@ -101,17 +100,17 @@ void LeePositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
 
   if((odometry_.velocity.z() > 0.01) || (odometry_.velocity.z() < -0.01))
   {
-    control_flag = 0;
+    control_flag = 1;
     //ROS_INFO("Control Flag is ON, %f", acceleration.z());
 
   }
 
- 
+
   if((odometry_.velocity.z() < 0.0001) && control_flag && (odometry_.velocity.z() > -0.0001))
   {
     if ((position_error < -0.1))
     {
-      double payload_mass = - (controller_parameters_.position_gain_.z() * (position_error))/vehicle_parameters_.gravity_;
+      double payload_mass = - (controller_parameters_.position_gain_.z() * (position_error + 0.185))/vehicle_parameters_.gravity_;
       normalized_mass = vehicle_parameters_.mass_ + payload_mass;
       //UpdateMassAndInertia(new_mass);      
       ROS_INFO("%f Normalized Mass: %f", odometry_.position.z(), payload_mass);
@@ -121,8 +120,7 @@ void LeePositionController::CalculateRotorVelocities(Eigen::VectorXd* rotor_velo
       integral_active_ = 1;
       ROS_INFO("Integral gain active");
   }
-  
-  //ROS_INFO("Feeding Calculated motor speeds");
+  ROS_INFO("Feeding Calculated motor speeds");
 
   
   /*double test_mass = ((I.inverse() *
@@ -190,7 +188,6 @@ void LeePositionController::ComputeDesiredAcceleration(Eigen::Vector3d* accelera
   }
 
 
-  //ROS_INFO("Mass : %f", normalized_mass);
 
   //ROS_INFO("Mass of Iris: %f, %f", vehicle_parameters_.mass_, vehicle_parameters_.payload_mass_); //Added by Viswa
 }

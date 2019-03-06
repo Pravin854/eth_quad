@@ -20,7 +20,7 @@
   <xacro:property name="moment_constant" value="0.016" /> <!-- [m] -->
   <xacro:property name="time_constant_up" value="0.0125" /> <!-- [s] -->
   <xacro:property name="time_constant_down" value="0.025" /> <!-- [s] -->
-  <xacro:property name="max_rot_velocity" value="838" /> <!-- [rad/s] -->
+  <xacro:property name="max_rot_velocity" value="2000" /> <!-- [rad/s] -->
   <xacro:property name="sin30" value="0.5" />
   <xacro:property name="cos30" value="0.866025403784" />
   <xacro:property name="sqrt2" value="1.4142135623730951" />
@@ -140,7 +140,7 @@
   </xacro:vertical_rotor>
 
      <link name="box">
-    <xacro:box_inertial x="-0.1" y="-0.1" z="-0.1" mass="0.8">
+    <xacro:box_inertial x="-0.1" y="-0.1" z="-0.1" mass="0.1">
       <origin xyz="0 0 0" />
     </xacro:box_inertial>
     <visual>
@@ -164,10 +164,8 @@
     </joint>  
 
 
- <xacro:hokuyo_utm30lx robot_namespace="${namespace}" min_angle="-1.047" max_angle="1.047"
-    update_rate="40" ray_count="10">
-    <origin xyz="0 0 0.5" rpy="0 0 0"/>
-  </xacro:hokuyo_utm30lx> 
-
+<xacro:velodyne name="lidar" parent="${namespace}/base_link">
+  <origin xyz="0.0 0.0 0.1" rpy="0 0 0"/>
+</xacro:velodyne>
 
 </robot>

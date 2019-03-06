@@ -28,7 +28,7 @@
 #include <std_srvs/Empty.h>
 #include <trajectory_msgs/MultiDOFJointTrajectory.h>
 
-int main(int argc, char** argv) {
+int main(int arasgc, char** argv) {
   ros::init(argc, argv, "hovering_example");
   ros::NodeHandle nh, n;
   // Create a private node handle for accessing node parameters.

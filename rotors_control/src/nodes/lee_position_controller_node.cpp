@@ -33,6 +33,8 @@ LeePositionControllerNode::LeePositionControllerNode(
    private_nh_(private_nh){
   InitializeParams();
 
+  ROS_INFO("Let us initilize the nodes and callbacks");
+
   cmd_pose_sub_ = nh_.subscribe(
       mav_msgs::default_topics::COMMAND_POSE, 1,
       &LeePositionControllerNode::CommandPoseCallback, this);
@@ -49,6 +51,7 @@ LeePositionControllerNode::LeePositionControllerNode(
 
   command_timer_ = nh_.createTimer(ros::Duration(0), &LeePositionControllerNode::TimedCommandCallback, this,
                                   true, false);
+  sub = nh_.subscribe("/scan", 1000, &LeePositionControllerNode::callback, this);
 }
 
 LeePositionControllerNode::~LeePositionControllerNode() { }
@@ -200,12 +203,21 @@ void LeePositionControllerNode::OdometryCallback(const nav_msgs::OdometryConstPt
 
   motor_velocity_reference_pub_.publish(actuator_msg);
 }
+void LeePositionControllerNode::callback(const sensor_msgs::LaserScan::ConstPtr& input)
+{
+  ROS_INFO("Laser Scan Message recieved");
+  if( !input->ranges.empty())
+  {
+    ROS_INFO("%f", input->ranges[0]);
+  }
+}
 }
 /*void UpdaterCallback(const std_msgs::String::ConstPtr& update) //Added by Viswa
 {
   ROS_INFO("Parameter Update received.");
   lee_position_controller_.UpdateMassAndInertia();
 }*/
+
 
 
 

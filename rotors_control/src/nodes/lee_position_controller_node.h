@@ -37,6 +37,8 @@
 #include "rotors_control/common.h"
 #include "rotors_control/lee_position_controller.h"
 
+#include "sensor_msgs/LaserScan.h"
+
 namespace rotors_control {
 
 class LeePositionControllerNode {
@@ -51,6 +53,8 @@ class LeePositionControllerNode {
   ros::NodeHandle nh_;
   ros::NodeHandle private_nh_;
 
+  ros::NodeHandle nhs_;
+
   LeePositionController lee_position_controller_;
 
   std::string namespace_;
@@ -60,6 +64,7 @@ class LeePositionControllerNode {
   ros::Subscriber cmd_multi_dof_joint_trajectory_sub_;
   ros::Subscriber cmd_pose_sub_;
   ros::Subscriber odometry_sub_;
+  ros::Subscriber sub;
 
   ros::Publisher motor_velocity_reference_pub_;
 
@@ -78,7 +83,10 @@ class LeePositionControllerNode {
   void OdometryCallback(const nav_msgs::OdometryConstPtr& odometry_msg);
 
   /*void UpdaterCallback(const std_msgs::String::ConstPtr& update); //Added by Viswa*/
+  void callback(const sensor_msgs::LaserScan::ConstPtr& input);
+  
 };
 }
+
 
 #endif // ROTORS_CONTROL_LEE_POSITION_CONTROLLER_NODE_H
